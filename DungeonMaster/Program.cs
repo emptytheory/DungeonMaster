@@ -1,5 +1,4 @@
 ﻿using DungeonMaster.Heroes;
-using DungeonMaster.Stats;
 
 namespace DungeonMaster
 {

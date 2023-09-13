@@ -1,4 +1,6 @@
-﻿using DungeonMaster.Equipment.Item;
+﻿using DungeonMaster.Equipment.Armor;
+using DungeonMaster.Equipment;
+using DungeonMaster.Equipment.Weapon;
 using DungeonMaster.Stats;
 
 namespace DungeonMaster.Heroes

@@ -1,8 +1,9 @@
-﻿using DungeonMaster.Equipment.Item;
-using DungeonMaster.Stats;
+﻿using DungeonMaster.Stats;
 using DungeonMaster.Exceptions;
 using System.Text;
-
+using DungeonMaster.Equipment.Armor;
+using DungeonMaster.Equipment.Weapon;
+using DungeonMaster.Equipment;
 
 namespace DungeonMaster.Heroes
 {
@@ -12,7 +13,7 @@ namespace DungeonMaster.Heroes
         protected int Level { get; set; } = 1;
         protected abstract HeroAttributes AttributesGain { get; set; }
         protected abstract HeroAttributes LevelAttributes { get; set; }
-        protected Dictionary<Slot, Item?> Equipment = new Dictionary<Slot, Item?>()
+        protected Dictionary<Slot, Item?> Equipment = new()
         {
             {Slot.Weapon, null},
             {Slot.Head, null},

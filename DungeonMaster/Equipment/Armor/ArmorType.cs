@@ -1,4 +1,4 @@
-﻿namespace DungeonMaster.Equipment.Item
+﻿namespace DungeonMaster.Equipment.Armor
 {
     internal enum ArmorType
     {
