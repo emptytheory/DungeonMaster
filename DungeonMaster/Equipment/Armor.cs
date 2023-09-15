@@ -1,13 +1,13 @@
 ﻿using DungeonMaster.Stats;
 
-namespace DungeonMaster.Equipment.Armor
+namespace DungeonMaster.Equipment
 {
-    internal class Armor : Item
+    public class Armor : Item
     {
         public ArmorType ArmorType { get; }
         public HeroAttributes ArmorAttribute { get; }
 
-        public Armor(string name, ArmorType type, HeroAttributes armorAttibutes, Slot slot) : base(name)
+        public Armor(string name, ArmorType type, HeroAttributes armorAttibutes, Slot slot, int requiredLevel) : base(name, requiredLevel)
         {
             ArmorType = type;
             ArmorAttribute = armorAttibutes;

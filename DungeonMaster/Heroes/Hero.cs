@@ -1,18 +1,19 @@
 ﻿using DungeonMaster.Stats;
 using DungeonMaster.Exceptions;
 using System.Text;
-using DungeonMaster.Equipment.Armor;
-using DungeonMaster.Equipment.Weapon;
 using DungeonMaster.Equipment;
 
 namespace DungeonMaster.Heroes
 {
-    internal abstract class Hero
+    public abstract class Hero
     {
-        protected string Name { get; }
-        protected int Level { get; set; } = 1;
-        protected abstract HeroAttributes AttributesGain { get; set; }
-        protected abstract HeroAttributes LevelAttributes { get; set; }
+        public string Name { get; }
+        public int Level { get; protected set; } = 1;
+        public abstract HeroAttributes LevelAttributes { get; protected set; }
+        protected abstract HeroAttributes AttributesGain { get; }
+        protected abstract int DamageAttributeValue { get; }
+        protected abstract List<WeaponType> ValidWeaponTypes { get; }
+        protected abstract List<ArmorType> ValidArmorTypes { get; }
         protected Dictionary<Slot, Item?> Equipment = new()
         {
             {Slot.Weapon, null},
@@ -20,8 +21,6 @@ namespace DungeonMaster.Heroes
             {Slot.Body, null},
             {Slot.Legs, null}
         };
-        protected abstract List<WeaponType> ValidWeaponTypes { get; set; }
-        protected abstract List<ArmorType> ValidArmorTypes { get; set; }
 
         // Constructor – each hero is created by passing just a name.
 
@@ -41,7 +40,7 @@ namespace DungeonMaster.Heroes
         // Equip - for equipping weapons
         public void Equip(Weapon weapon)
         {
-            if (ValidWeaponTypes.Contains(weapon.WeaponType))
+            if (!ValidWeaponTypes.Contains(weapon.WeaponType))
                 throw new InvalidWeaponException($"This hero cannot equip a/an {weapon.Name}.");
 
             if (weapon.ReqiredLevel > Level)
@@ -53,17 +52,21 @@ namespace DungeonMaster.Heroes
         // Equip - for equipping armor 
         public void Equip(Armor armor)
         {
-            if (ValidArmorTypes.Contains(armor.ArmorType))
-                throw new InvalidWeaponException($"This hero cannot wear a/an {armor.Name.ToLower()}.");
+            if (!ValidArmorTypes.Contains(armor.ArmorType))
+                throw new InvalidArmorException($"This hero cannot wear a/an {armor.Name}.");
 
             if (armor.ReqiredLevel > Level)
-                throw new InvalidWeaponException($"A hero must be at least level {armor.ReqiredLevel} to equip a/an {armor.Name.ToLower()}.");
+                throw new InvalidArmorException($"A hero must be at least level {armor.ReqiredLevel} to equip a/an {armor.Name}.");
 
             Equipment[armor.Slot] = armor;
         }
 
         // Damage – damage is calculated on the fly and not stored
-        public abstract int Damage();
+        public double Damage()
+        {
+            int baseDamage = Equipment[Slot.Weapon] is Weapon weapon ? weapon.WeaponDamage : 1;
+            return baseDamage * (1 + DamageAttributeValue / 100d);
+        }
 
         // TotalAttributes – calculated on the fly and not stored
         // Total = LevelAttributes + (Sum of ArmorAttribute for all Armor in Equipment) 
@@ -80,12 +83,7 @@ namespace DungeonMaster.Heroes
                 intelligence += armor.ArmorAttribute.Intelligence;
             }
 
-            return new()
-            {
-                Strength = strength,
-                Dexterity = dexterity,
-                Intelligence = intelligence
-            };
+            return new(strength, dexterity, intelligence);
         }
 
         //Display – details of Hero to be displayed

@@ -1,6 +1,6 @@
-﻿namespace DungeonMaster.Equipment.Armor
+﻿namespace DungeonMaster.Equipment
 {
-    internal enum ArmorType
+    public enum ArmorType
     {
         Cloth,
         Leather,

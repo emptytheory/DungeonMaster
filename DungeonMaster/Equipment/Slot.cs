@@ -1,6 +1,6 @@
 ﻿namespace DungeonMaster.Equipment
 {
-    internal enum Slot
+    public enum Slot
     {
         Weapon,
         Head,

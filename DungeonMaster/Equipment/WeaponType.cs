@@ -1,6 +1,6 @@
-﻿namespace DungeonMaster.Equipment.Weapon
+﻿namespace DungeonMaster.Equipment
 {
-    internal enum WeaponType
+    public enum WeaponType
     {
         Hatchet,
         Bow,

@@ -1,11 +1,11 @@
-﻿namespace DungeonMaster.Equipment.Weapon
+﻿namespace DungeonMaster.Equipment
 {
-    internal class Weapon : Item
+    public class Weapon : Item
     {
         public WeaponType WeaponType { get; }
         public int WeaponDamage { get; }
 
-        public Weapon(string name, WeaponType type, int weaponDamage) : base(name)
+        public Weapon(string name, WeaponType type, int weaponDamage, int requiredLevel) : base(name, requiredLevel)
         {
             Slot = Slot.Weapon;
             WeaponDamage = weaponDamage;
