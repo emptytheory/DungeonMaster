@@ -7,10 +7,10 @@ namespace DungeonMaster.Equipment
         public ArmorType ArmorType { get; }
         public HeroAttributes ArmorAttribute { get; }
 
-        public Armor(string name, ArmorType type, HeroAttributes armorAttibutes, Slot slot, int requiredLevel) : base(name, requiredLevel)
+        public Armor(string name, ArmorType type, HeroAttributes armorAttribute, Slot slot, int requiredLevel) : base(name, requiredLevel)
         {
             ArmorType = type;
-            ArmorAttribute = armorAttibutes;
+            ArmorAttribute = armorAttribute;
             Slot = slot;
         }
     }

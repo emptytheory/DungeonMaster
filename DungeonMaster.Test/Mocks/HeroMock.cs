@@ -11,16 +11,13 @@ namespace DungeonMaster.Test.Mocks
         }
 
         protected override HeroAttributes AttributesGain => new();
+        protected override int DamageAttributeValue => TotalAttributes().Strength;
 
         public override HeroAttributes LevelAttributes { get; protected set; } = new();
 
-        protected override List<WeaponType> ValidWeaponTypes => new() { WeaponType.Bow };
+        protected override List<WeaponType> ValidWeaponTypes => new() { WeaponType.Bow, WeaponType.Staff };
 
-        protected override List<ArmorType> ValidArmorTypes => new() { ArmorType.Leather };
+        protected override List<ArmorType> ValidArmorTypes => new() { ArmorType.Leather, ArmorType.Cloth };
 
-        public override double Damage()
-        {
-            return 0.0;
-        }
     }
 }

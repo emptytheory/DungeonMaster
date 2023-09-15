@@ -1,6 +1,5 @@
 ﻿using DungeonMaster.Heroes;
 using DungeonMaster.Stats;
-using Xunit.Sdk;
 
 namespace DungeonMaster.Test.Heroes
 {
@@ -9,14 +8,11 @@ namespace DungeonMaster.Test.Heroes
         [Fact]
         public void LevelAttributes_GetLevelAttributes_ShouldReturnWizardStats()
         {
-            //Arrange
             Wizard wizard = new("Gandalf");
             HeroAttributes expected = new(strength: 1, dexterity: 1, intelligence: 8);
 
-            //Act
             HeroAttributes actual = wizard.LevelAttributes;
 
-            //Assert
             Assert.Equal(expected, actual);
         }
 
@@ -46,7 +42,6 @@ namespace DungeonMaster.Test.Heroes
 
             Assert.Equal(expected, actual);
         }
-
 
     }
 }
